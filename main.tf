@@ -18,7 +18,8 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Repository = "serverless-data-lakehouse"
+      Environment = var.environment
+      Repository  = "serverless-data-lakehouse"
     }
   }
 }
