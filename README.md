@@ -40,5 +40,26 @@ So the focus is more on the Datalake side than on the Data Warehouse side. But t
 
 # Roadmap (Will change over time)
 
-1. Providing the first ingesting layer by adding the Database Migration Service.
-2. Turn raw data into Apache Iceberg tables for high query performance on large data amounts.
+1. Providing the first ingesting layer by adding the Database Migration Service. (Ongoing)
+2. Turn raw data into Apache Iceberg tables for high query performance on large data amounts. (Waiting)
+
+
+# Installation
+
+## Prerequisites
+
+You need:
+1. AWS Account
+2. AWS CLI v2 (Set the credentials into the [default] and [serverless-data-lakehouse] profiles.)
+3. Terraform CLI
+4. Make
+5. Python 3.9 oder newer
+
+### Initialize Terraform
+There are multiple ways of handling the Terraform state and lock. I can recommend to use the AWS hosted variant using an S3 Bucket and a DynamoDB.
+
+1. Create a Bucket in you AWS Account where you want to store the tfstate file per environment.
+2. Create a DynamoDB to handle the state lock.
+3. Edit the file ```environments/[env]/backend.conf``` and set the Bucket and Table name to the one you set in your account.
+4. To initialize the Terraform backend, run this command: ```terraform init```
+5. To execute the Terraform apply you can use the Makefile provided in this project as a short cut: ```make tf-apply env=[env]``` (set env equals to "dev" or "prod")
